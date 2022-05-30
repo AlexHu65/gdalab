@@ -13,7 +13,7 @@
 4.3 php artisan db:seed --class=CommuneSeeder
 
 5. Se requiere instalar instalar en un servidor local con PHP Version 8.0.11, version de desarrollo no disponible con php artisan serve
-6. Documentacion general: http://localhost/gdalab/public/docs
+6. Una vez instalado el proyecto se puede visualizar la doc general: http://localhost/gdalab/public/docs
 7. Modificar .env
 
 DB_CONNECTION=mysql
