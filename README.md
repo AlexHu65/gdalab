@@ -14,7 +14,7 @@
 	3.3 php artisan db:seed --class=CommuneSeeder
 4. Se requiere instalar instalar en un servidor local con PHP Version 8.0.11, version de desarrollo no disponible con php artisan serve
 
-## End points
+## EndPoints
 
 1. Login
 	1.1 api/login
@@ -55,21 +55,20 @@
 	Response example
 	```json
 		{
-		"status": true,
-		"data": [
-					{
-						"name": "Manuel Alejandro Chavez Nunez",
-						"last_name": "Manuel Alejandro Chavez Nunez",
-						"address": null,
-						"region": {
-							"description": "Michoacan"
-						},
-						"commune": {
-							"description": "Guanajuato CPT"
-						}
-					}
-				]
-		}
+    "status": true,
+    "data": [
+        {
+            "name": "Manuel Alejandro Chavez Nunez",
+            "last_name": "Manuel Alejandro Chavez Nunez",
+            "address": null,
+            "region": {
+                "description": "Michoacan"
+            },
+            "commune": {
+                "description": "Guanajuato CPT"
+            }
+        }
+    ]
 	```
 
 
