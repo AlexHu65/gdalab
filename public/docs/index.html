@@ -51,9 +51,51 @@
     <div class="dark-box"></div>
     <div class="content">
         <h1>Introduction</h1>
-<p>This documentation aims to provide all the information you need to work with our API.</p>
-<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
-You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<p>Se requiere hacer 3 Servicios Restful donde :</p>
+<ol>
+<li>Se registren Customers.</li>
+<li>Se consulten Customer por dni o email.</li>
+<li>Eliminar lógicamente el customer del sistema.</li>
+<li>Cada servicio retornará a demás de la información solicitada un success true si se
+ejecuto correctamente y si no un false. </li>
+</ol>
+<p>Indicaciones a seguir :</p>
+<ol start="0">
+<li>Se debe hacer un servicio de autenticación que retorne cuando el inicio de sesión
+sea exitoso un token con tiempo de vida (el token no debe repetirse y conformado
+de email, fecha y hora del inicio de sesión y un random de 200 a 500 todo encriptado
+en SHA1 ), este token deberá ser usado en todos los otros servicios a hacer y
+validando que si esta vencido no pueda ser usado y no de acceso al servicio.
+(Debe crear las tablas necesarias para que esta función se cumpla.)</li>
+<li>Al registrar, asociar la commune y region del cliente, hacer todas las validaciones
+pertinentes. ejm no permitir registro de customer en commune y regiones que no
+estén relacionadas o no existan.</li>
+<li>La consulta debe hacerse solo con customer activos (A), no con desactivo (I) o
+eliminados (trash), adicionalmente deberá retornar name, last_name, address (de
+no tener address retorna null en el campo), description region y commune. Realizar
+validaciones pertinentes.</li>
+<li>El customer a eliminar debe de estar activo (A) o desactivo (I). En el caso de estar
+ya eliminado (trash) retornar “Registro no existe”. Hacer validaciones pertinentes.</li>
+<li>El servicio debe de solo poder ser ejecutado en POST (Inserción) DELETE
+(Eliminación de registros) GET (Consulta de información).</li>
+<li>Debe de ser desarrollado en php en el framework Lumen o Laravel (Ultimas
+versiones) utilizando todas las herramientas que estas entregan para su correcto
+funcionamiento.</li>
+<li>El código debe de estar protegido para sql Injection y con un key de autenticación
+(Debe implementarse a través de middlewares) Toda validación previa (campos
+obligatorios, o validaciones de que la información que pasan exista debe hacerse a
+través de middlewares).</li>
+<li>Documentación del servicio para su uso y para el desarrollador (Definición de
+servicios, metodos, pasos para su instalación, configuración y requerimientos
+mínimos) todo esto en el archivo ReadMe del proyecto.</li>
+<li>Debe manejar logs de entrada y salida de información (puede estar en BD o en
+archivos de texto plano), así mismo, indicar de que IP proviene la información.</li>
+<li>La plataforma debe tener un parámetro en el .env donde si se pasa a producción
+deja de guardar los logs de salida y solo guardar los de entrada.
+Este parámetro APP_DEBUG siempre debe estar en False.</li>
+<li>Al terminar el proyecto se debe de subir a un github publico y copiar el repo y
+pasarlo de respuesta en el correo donde te llego este documento.</li>
+</ol>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 <script>
     var baseUrl = "http://localhost/gdalab/public";
@@ -62,7 +104,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <blockquote>
 <p>Base URL</p>
 </blockquote>
-<pre><code class="language-yaml">http://localhost/gdalab/public</code></pre><h1>Authenticating requests</h1>
+<pre><code class="language-yaml">http://localhost/gdalab/public/api</code></pre><h1>Authenticating requests</h1>
 <p>This API is not authenticated.</p><h1>Endpoints</h1>
 <h2>Return an empty response simply to trigger the storage of the CSRF cookie in the browser.</h2>
 <blockquote>
@@ -175,7 +217,9 @@ Passoword para generar el login.
 <pre><code class="language-bash">curl -X POST \
     "http://localhost/gdalab/public/api/customer/add" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"dni":"illo","region":5,"commune":3,"email":"perferendis","name":"explicabo","last_name":"asperiores","token":"necessitatibus"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/gdalab/public/api/customer/add"
 );
@@ -185,9 +229,20 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "dni": "illo",
+    "region": 5,
+    "commune": 3,
+    "email": "perferendis",
+    "name": "explicabo",
+    "last_name": "asperiores",
+    "token": "necessitatibus"
+}
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>
 <div id="execution-results-POSTapi-customer-add" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-customer-add"></span>:</blockquote>
@@ -208,178 +263,50 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/customer/add</code></b>
 </p>
-</form>
-<h2>api/customers</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/gdalab/public/api/customers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"token":"velit"}'
-</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/gdalab/public/api/customers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "token": "velit"
-}
-
-fetch(url, {
-    method: "GET",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "status": true,
-    "data": {
-        "msg": "Token no valido"
-    }
-}</code></pre>
-<div id="execution-results-GETapi-customers" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-customers"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-customers"></code></pre>
-</div>
-<div id="execution-error-GETapi-customers" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-customers"></code></pre>
-</div>
-<form id="form-GETapi-customers" data-method="GET" data-path="api/customers" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-customers', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-customers" onclick="tryItOut('GETapi-customers');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-customers" onclick="cancelTryOut('GETapi-customers');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-customers" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/customers</code></b>
-</p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
+<b><code>dni</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="dni" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>region</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="region" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>commune</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="commune" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="name" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>last_name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="last_name" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
 <b><code>token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="token" data-endpoint="GETapi-customers" data-component="body" required  hidden>
+<input type="text" name="token" data-endpoint="POSTapi-customer-add" data-component="body" required  hidden>
 <br>
-token para user.
+token para user
 </p>
 
-</form>
-<h2>api/customer/{param}</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/gdalab/public/api/customer/quia" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -H "token: placeat"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/gdalab/public/api/customer/quia"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "token": "placeat",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "status": true,
-    "data": {
-        "msg": "Token no valido"
-    }
-}</code></pre>
-<div id="execution-results-GETapi-customer--param-" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-customer--param-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-customer--param-"></code></pre>
-</div>
-<div id="execution-error-GETapi-customer--param-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-customer--param-"></code></pre>
-</div>
-<form id="form-GETapi-customer--param-" data-method="GET" data-path="api/customer/{param}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"placeat"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-customer--param-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-customer--param-" onclick="tryItOut('GETapi-customer--param-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-customer--param-" onclick="cancelTryOut('GETapi-customer--param-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-customer--param-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/customer/{param}</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>param</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="param" data-endpoint="GETapi-customer--param-" data-component="url" required  hidden>
-<br>
-
-</p>
-</form>
-<h2>api/customer/{param}</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/gdalab/public/api/customer/corporis" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/gdalab/public/api/customer/corporis"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<div id="execution-results-DELETEapi-customer--param-" hidden>
-    <blockquote>Received response<span id="execution-response-status-DELETEapi-customer--param-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-customer--param-"></code></pre>
-</div>
-<div id="execution-error-DELETEapi-customer--param-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-customer--param-"></code></pre>
-</div>
-<form id="form-DELETEapi-customer--param-" data-method="DELETE" data-path="api/customer/{param}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-customer--param-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-DELETEapi-customer--param-" onclick="tryItOut('DELETEapi-customer--param-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-DELETEapi-customer--param-" onclick="cancelTryOut('DELETEapi-customer--param-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-DELETEapi-customer--param-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-red">DELETE</small>
- <b><code>api/customer/{param}</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>param</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="param" data-endpoint="DELETEapi-customer--param-" data-component="url" required  hidden>
-<br>
-
-</p>
 </form>
     </div>
     <div class="dark-box">

@@ -10,9 +10,7 @@ use Carbon\Carbon;
 class CustomersController extends Controller
 {
 
-	/**
-    * @bodyParam token string required token para user.
-    */
+	
 	public function customers(Request $request){
 		try {
 			
@@ -82,6 +80,15 @@ class CustomersController extends Controller
 		}
 	}
 
+	/**
+    * @bodyParam dni string 
+    * @bodyParam region int
+    * @bodyParam commune int
+    * @bodyParam email string
+    * @bodyParam name string
+    * @bodyParam last_name string
+    * @bodyParam token string required token para user
+    */
 
 	public function create(Request $request){
 

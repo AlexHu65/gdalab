@@ -92,6 +92,43 @@ paths:
             responses: {  }
             tags:
                 - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                dni:
+                                    type: string
+                                    description: ''
+                                    example: sint
+                                region:
+                                    type: integer
+                                    description: ''
+                                    example: 18
+                                commune:
+                                    type: integer
+                                    description: ''
+                                    example: 12
+                                email:
+                                    type: string
+                                    description: ''
+                                    example: omnis
+                                name:
+                                    type: string
+                                    description: ''
+                                    example: sunt
+                                last_name:
+                                    type: string
+                                    description: ''
+                                    example: nam
+                                token:
+                                    type: string
+                                    description: 'token para user'
+                                    example: earum
+                            required:
+                                - token
             security: []
     /api/customers:
         get:
@@ -120,26 +157,13 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    status: true
-                                    data: { msg: 'Token no valido' }
+                                    status: false
+                                    data: { token: ['The token field is required.'] }
                                 properties:
-                                    status: { type: boolean, example: true }
-                                    data: { type: object, example: { msg: 'Token no valido' } }
+                                    status: { type: boolean, example: false }
+                                    data: { type: object, example: { token: ['The token field is required.'] } }
             tags:
                 - Endpoints
-            requestBody:
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                token:
-                                    type: string
-                                    description: 'token para user.'
-                                    example: velit
-                            required:
-                                - token
             security: []
     '/api/customer/{param}':
         get:
@@ -164,7 +188,7 @@ paths:
                     in: header
                     name: token
                     description: ''
-                    example: placeat
+                    example: rerum
                     schema:
                         type: string
             responses:
@@ -210,7 +234,7 @@ paths:
                 in: path
                 name: param
                 description: ''
-                example: quia
+                example: est
                 required: true
                 schema:
                     type: string

@@ -11,7 +11,7 @@
 	3.2 php artisan db:seed --class=RegionSeeder
 	3.3 php artisan db:seed --class=CommuneSeeder
 4. Se requiere instalar instalar en un servidor local con PHP Version 8.0.11, version de desarrollo no disponible con php artisan serve
-
+5. Documentacion general: http://localhost/gdalab/public/docs
 ## EndPoints
 
 1. Login
@@ -126,6 +126,36 @@
 			"msg": "Registro no existe"
 		}
 	}
+	```
+3. Agregar customer customer
+	2.1 api/customer/{param}
+
+	Descripcion:Se agrega el customer.
+	Tipo: POST
+
+	Body params
+	```json
+		{
+			"dni": "123456789L4",
+			"region" : 3,
+			"commune": 2,
+			"email": "alejandrotsu20@gmail.com",
+			"name": "Manuel Alejandro Chavez Nunez",
+			"last_name": "Manuel Alejandro Chavez Nunez",
+			"token": "$2y$10$V6LutZOmTQwoK2pfZH5HP.W8DhFqsSkcBfj5uAb/E3DF5nOfxbJ8m"
+		}
+		
+	```
+
+	Responses example
+	```json
+		{
+    		"status": true,
+    		"data": {
+        		"msg": "Registro guardado"
+    		}
+		}
+
 	```
 
 

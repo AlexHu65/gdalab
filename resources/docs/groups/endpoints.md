@@ -141,7 +141,9 @@ Passoword para generar el login.
 curl -X POST \
     "http://localhost/gdalab/public/api/customer/add" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"dni":"illo","region":5,"commune":3,"email":"perferendis","name":"explicabo","last_name":"asperiores","token":"necessitatibus"}'
+
 ```
 
 ```javascript
@@ -154,10 +156,20 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "dni": "illo",
+    "region": 5,
+    "commune": 3,
+    "email": "perferendis",
+    "name": "explicabo",
+    "last_name": "asperiores",
+    "token": "necessitatibus"
+}
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response => response.json());
 ```
 
@@ -181,219 +193,54 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/customer/add</code></b>
 </p>
-</form>
-
-
-## api/customers
-
-
-
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/gdalab/public/api/customers" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"token":"velit"}'
-
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/gdalab/public/api/customers"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "token": "velit"
-}
-
-fetch(url, {
-    method: "GET",
-    headers,
-    body: JSON.stringify(body),
-}).then(response => response.json());
-```
-
-
-> Example response (200):
-
-```json
-{
-    "status": true,
-    "data": {
-        "msg": "Token no valido"
-    }
-}
-```
-<div id="execution-results-GETapi-customers" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-customers"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-customers"></code></pre>
-</div>
-<div id="execution-error-GETapi-customers" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-customers"></code></pre>
-</div>
-<form id="form-GETapi-customers" data-method="GET" data-path="api/customers" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-customers', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-customers" onclick="tryItOut('GETapi-customers');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-customers" onclick="cancelTryOut('GETapi-customers');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-customers" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/customers</code></b>
-</p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
+<b><code>dni</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="dni" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>region</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="region" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>commune</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="commune" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="name" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>last_name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="last_name" data-endpoint="POSTapi-customer-add" data-component="body"  hidden>
+<br>
+
+</p>
+<p>
 <b><code>token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="token" data-endpoint="GETapi-customers" data-component="body" required  hidden>
+<input type="text" name="token" data-endpoint="POSTapi-customer-add" data-component="body" required  hidden>
 <br>
-token para user.
+token para user
 </p>
 
 </form>
 
 
-## api/customer/{param}
 
-
-
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/gdalab/public/api/customer/quia" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -H "token: placeat"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/gdalab/public/api/customer/quia"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "token": "placeat",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response => response.json());
-```
-
-
-> Example response (200):
-
-```json
-{
-    "status": true,
-    "data": {
-        "msg": "Token no valido"
-    }
-}
-```
-<div id="execution-results-GETapi-customer--param-" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-customer--param-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-customer--param-"></code></pre>
-</div>
-<div id="execution-error-GETapi-customer--param-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-customer--param-"></code></pre>
-</div>
-<form id="form-GETapi-customer--param-" data-method="GET" data-path="api/customer/{param}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","token":"placeat"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-customer--param-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-customer--param-" onclick="tryItOut('GETapi-customer--param-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-customer--param-" onclick="cancelTryOut('GETapi-customer--param-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-customer--param-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/customer/{param}</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>param</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="param" data-endpoint="GETapi-customer--param-" data-component="url" required  hidden>
-<br>
-
-</p>
-</form>
-
-
-## api/customer/{param}
-
-
-
-
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost/gdalab/public/api/customer/corporis" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/gdalab/public/api/customer/corporis"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response => response.json());
-```
-
-
-<div id="execution-results-DELETEapi-customer--param-" hidden>
-    <blockquote>Received response<span id="execution-response-status-DELETEapi-customer--param-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-customer--param-"></code></pre>
-</div>
-<div id="execution-error-DELETEapi-customer--param-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-customer--param-"></code></pre>
-</div>
-<form id="form-DELETEapi-customer--param-" data-method="DELETE" data-path="api/customer/{param}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-customer--param-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-DELETEapi-customer--param-" onclick="tryItOut('DELETEapi-customer--param-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-DELETEapi-customer--param-" onclick="cancelTryOut('DELETEapi-customer--param-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-DELETEapi-customer--param-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-red">DELETE</small>
- <b><code>api/customer/{param}</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>param</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="param" data-endpoint="DELETEapi-customer--param-" data-component="url" required  hidden>
-<br>
-
-</p>
-</form>
 
 
 

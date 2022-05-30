@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "gdalab",
-        "_postman_id": "bdb5b4a6-ae4c-4d3e-b9c1-be4c304cc53f",
+        "_postman_id": "a7672a00-083c-4f0b-bee7-670bed4605a7",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -101,7 +101,10 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"dni\": \"sint\",\n    \"region\": 18,\n    \"commune\": 12,\n    \"email\": \"omnis\",\n    \"name\": \"sunt\",\n    \"last_name\": \"nam\",\n    \"token\": \"earum\"\n}"
+                        },
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -130,10 +133,7 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"token\": \"velit\"\n}"
-                        },
+                        "body": null,
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -161,10 +161,7 @@
                                         "value": "application\/json"
                                     }
                                 ],
-                                "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"token\": \"velit\"\n}"
-                                },
+                                "body": null,
                                 "description": "",
                                 "auth": {
                                     "type": "noauth"
@@ -172,7 +169,7 @@
                             },
                             "header": null,
                             "cookie": [],
-                            "body": "{\n    \"status\": true,\n    \"data\": {\n        \"msg\": \"Token no valido\"\n    }\n}"
+                            "body": "{\n    \"status\": false,\n    \"data\": {\n        \"token\": [\n            \"The token field is required.\"\n        ]\n    }\n}"
                         }
                     ]
                 },
@@ -189,7 +186,7 @@
                                 {
                                     "id": "param",
                                     "key": "param",
-                                    "value": "quia",
+                                    "value": "est",
                                     "description": ""
                                 }
                             ]
@@ -206,7 +203,7 @@
                             },
                             {
                                 "key": "token",
-                                "value": "placeat"
+                                "value": "rerum"
                             }
                         ],
                         "body": null,
@@ -229,7 +226,7 @@
                                         {
                                             "id": "param",
                                             "key": "param",
-                                            "value": "quia",
+                                            "value": "est",
                                             "description": ""
                                         }
                                     ]
@@ -246,7 +243,7 @@
                                     },
                                     {
                                         "key": "token",
-                                        "value": "placeat"
+                                        "value": "rerum"
                                     }
                                 ],
                                 "body": null,
@@ -274,7 +271,7 @@
                                 {
                                     "id": "param",
                                     "key": "param",
-                                    "value": "corporis",
+                                    "value": "corrupti",
                                     "description": ""
                                 }
                             ]
