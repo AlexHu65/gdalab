@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+    title: gdalab
+    description: ''
+    version: 1.0.0
+servers:
+    -
+        url: 'http://localhost/gdalab/public'
+paths:
+    /sanctum/csrf-cookie:
+        get:
+            summary: 'Return an empty response simply to trigger the storage of the CSRF cookie in the browser.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /api/login:
+        post:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                    description: 'The id of the user.'
+                                    example: alejandrotsu23@gmail.com
+                                password:
+                                    type: string
+                                    description: 'Passoword para generar el login.'
+                                    example: '123456'
+                            required:
+                                - email
+            security: []
+    /api/customer/add:
+        post:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /api/customers:
+        get:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    status: true
+                                    data: { msg: 'Token no valido' }
+                                properties:
+                                    status: { type: boolean, example: true }
+                                    data: { type: object, example: { msg: 'Token no valido' } }
+            tags:
+                - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                token:
+                                    type: string
+                                    description: 'token para user.'
+                                    example: velit
+                            required:
+                                - token
+            security: []
+    '/api/customer/{param}':
+        get:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: token
+                    description: ''
+                    example: placeat
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    status: true
+                                    data: { msg: 'Token no valido' }
+                                properties:
+                                    status: { type: boolean, example: true }
+                                    data: { type: object, example: { msg: 'Token no valido' } }
+            tags:
+                - Endpoints
+            security: []
+        delete:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: param
+                description: ''
+                example: quia
+                required: true
+                schema:
+                    type: string
