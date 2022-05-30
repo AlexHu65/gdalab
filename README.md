@@ -6,12 +6,23 @@
 ## Iniciar proyecto
 1. Instalar dependencias con: composer install
 2. Correr migraciones: php artisan migrate
-3. Correr los seeders de usuario, regions y communes
-	3.1 php artisan db:seed --class=UserSeeder
-	3.2 php artisan db:seed --class=RegionSeeder
-	3.3 php artisan db:seed --class=CommuneSeeder
-4. Se requiere instalar instalar en un servidor local con PHP Version 8.0.11, version de desarrollo no disponible con php artisan serve
-5. Documentacion general: http://localhost/gdalab/public/docs
+3. Crear base de datos gdalab
+4. Correr los seeders de usuario, regions y communes
+4.1 php artisan db:seed --class=UserSeeder
+4.2 php artisan db:seed --class=RegionSeeder
+4.3 php artisan db:seed --class=CommuneSeeder
+
+5. Se requiere instalar instalar en un servidor local con PHP Version 8.0.11, version de desarrollo no disponible con php artisan serve
+6. Documentacion general: http://localhost/gdalab/public/docs
+7. Modificar .env
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gdalab
+DB_USERNAME=root
+DB_PASSWORD=
+
 ## EndPoints
 
 1. Login
