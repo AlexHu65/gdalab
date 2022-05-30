@@ -55,20 +55,20 @@
 	Response example
 	```json
 		{
-    		"status": true,
-    		"data": [
+		"status": true,
+		"data": [
 					{
-            			"name": "Manuel Alejandro Chavez Nunez",
-            			"last_name": "Manuel Alejandro Chavez Nunez",
-            			"address": null,
-            			"region": {
-                			"description": "Michoacan"
+						"name": "Manuel Alejandro Chavez Nunez",
+						"last_name": "Manuel Alejandro Chavez Nunez",
+						"address": null,
+						"region": {
+							"description": "Michoacan"
 						},
 						"commune": {
-                			"description": "Guanajuato CPT"
+							"description": "Guanajuato CPT"
 						}
-        			}
-    				]
+					}
+				]
 		}
 	```
 
